@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/py
 
 '''
 	Author: Oliver Croomes
@@ -28,6 +28,10 @@ import operator
 if __name__=='__main__':
 	dictionary = dict()
 	trash = set()
+	
+	if(sys.argv[1] == None):
+		print(u"Program arguments are:\nprg_name file.txt")
+		exit()
 
 	#copypasted
 	text = ''.join(open(sys.argv[1]).readlines())
@@ -44,7 +48,7 @@ if __name__=='__main__':
 	for sen in sentences:
 		words =  sen.split()
 
-		for x in xrange(0,len(words)):
+		for x in range(0,len(words)):
 
 			if words[x] in trash:
 				pass
@@ -67,9 +71,9 @@ if __name__=='__main__':
 					dictionary[words[x]] = 1
 
 	#actually sort the items from the dictionary
-	smart_words = sorted(dictionary.iteritems(), key=operator.itemgetter(1,0),reverse=True)
+	smart_words = sorted(dictionary.items(), key=operator.itemgetter(1,0),reverse=True)
 	
 	#print out the first 100 words to see if anythings worth it
 	for word in smart_words[:199]:
-		print word 	
+		print( word ) 	
 		

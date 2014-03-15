@@ -23,6 +23,8 @@ import sys
 # this is somehow used for sorting
 import operator
 
+import GoogleScraper
+import urllib.parse
 
 
 if __name__=='__main__':
@@ -76,4 +78,18 @@ if __name__=='__main__':
 	#print out the first 100 words to see if anythings worth it
 	for word in smart_words[:199]:
 		print( word ) 	
-		
+	
+	results = GoogleScraper.scrape("exacerbate",num_results_per_page=20, num_pages=1, offset=0, searchtype='normal')
+
+	for page in results:
+		for link_title, link_snippet, link_url in page['results']:
+		    # You can access all parts of the search results like that
+		    # link_url.scheme => URL scheme specifier (Ex: 'http')
+		    # link_url.netloc => Network location part (Ex: 'www.python.org')
+		    # link_url.path => URL scheme specifier (Ex: ''help/Python.html'')
+		    # link_url.params => Parameters for last path element
+		    # link_url.query => Query component
+			try:
+				print(urllib.parse.unquote(link_url.geturl())) # This reassembles the parts of the url to the whole thing
+			except:
+				pass
